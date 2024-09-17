@@ -51,5 +51,17 @@ app.get("/movie/:id", (req, res) => {
   res.status(404).send("Movie not found");
 });
 
+//delete
+app.delete("/movie/:id", (req, res) => {
+  const found = req.params.id;
+  movies = movies.filter((movie) => {
+    if (movie.id !== found) {
+      return true;
+    }
+    return false;
+  });
+  res.send("movie delete");
+});
+
 //set searver port
 app.listen(port, () => console.log(`listening at port no: ${port}`));

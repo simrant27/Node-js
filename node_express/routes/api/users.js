@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router(); //router is responsible for handling requests made to /api/users
 
-// const vuid = require("vuid");
+const uuid = require("uuid");
 //generate unique id
 
 let users = require("../../user");
@@ -19,6 +19,21 @@ router.get("/:id", (req, res) => {
   } else {
     res.sendStatus(400);
   }
+});
+
+//create a new user
+router.post("/", (req, res) => {
+  const newUser = {
+    id: uuid.v4(),
+    name: req.body.name,
+    email: req.body.email,
+  };
+  if (!newUser.name || !newUser.email) {
+    return res.sendStatus(400);
+  }
+
+  users.push(newUser);
+  res.json(users);
 });
 
 module.exports = router;

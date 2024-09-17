@@ -38,5 +38,18 @@ app.post("/movie", (req, res) => {
   res.json(movies);
 });
 
+//search for movies
+app.get("/movie/:id", (req, res) => {
+  const id = req.params.id;
+
+  movies.forEach((movie) => {
+    if (movie.id === id) {
+      res.json(movie);
+      return;
+    }
+  });
+  res.status(404).send("Movie not found");
+});
+
 //set searver port
 app.listen(port, () => console.log(`listening at port no: ${port}`));

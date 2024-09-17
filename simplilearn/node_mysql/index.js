@@ -42,6 +42,18 @@ app.get("/createemployee", (req, res) => {
   });
 });
 
+//insert employee
+app.get("/employee1", (req, res) => {
+  let post = { name: "Simran Tamang", designation: "designer" };
+  let sql = "INSERT INTO employee SET ?";
+  let query = db.query(sql, post, (err) => {
+    if (err) {
+      throw err;
+    }
+    res.send("Employee added");
+  });
+});
+
 app.listen(3000, (req, res) => {
   console.log("server started on port 3000");
 });

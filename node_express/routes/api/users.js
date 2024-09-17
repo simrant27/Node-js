@@ -50,4 +50,18 @@ router.put("/:id", (req, res) => {
     });
   }
 });
+
+//delete
+router.delete("/:id", (req, res) => {
+  const found = users.some((user) => user.id === parseInt(req.params.id));
+  if (found) {
+    users = users.filter((user) => user.id !== parseInt(req.params.id));
+    res.json({
+      msg: "user deleted",
+      users,
+    });
+  } else {
+    res.sendStatus(400);
+  }
+});
 module.exports = router;
